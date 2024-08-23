@@ -34,7 +34,6 @@ const resultSection = document.querySelector('.result-section');
 
 function calculateMortgage() {
     // Check if all input are entered or selected
-    console.log(!checkAllSelected())
     if(!checkAllSelected()) {
         return;
     }
@@ -46,15 +45,7 @@ function calculateMortgage() {
     }
 }
 
-function totalRepayment() {
-    console.log('-----totalRepayment')
-    console.log("Amount: " + mortgageAmount);
-    console.log('Term: ' + mortgageTerm);
-    console.log('Interest: ' + interestRate);
-    console.log('Repayment: ' + isRepayment);
-    console.log('InterestOnly: ' + isInterestOnly);
-    console.log('-----totalRepayment')
-    
+function totalRepayment() {    
     let monthlyInterestRate = (interestRate / 100) / 12;
     let numberOfPayments = mortgageTerm * 12;
 
