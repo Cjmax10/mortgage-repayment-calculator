@@ -1,0 +1,337 @@
+/* 
+**************************************
+        TABLE OF CONTENT
+***************************************
+    1. CSS VARIABLES
+    2. CSS RESET
+    3. GLOBAL
+    4. UTILITY CLASSES
+    5. COMPONENTS
+    6. STATES: HOVERS, FOCUS, ERROR
+*/
+
+/* 
+**************************************
+            CSS VARIABLES
+***************************************
+*/
+
+:root {
+    --primary-color: hsl(61, 70%, 52%);
+    --red: hsl(4, 69%, 50%);
+    --white: hsl(0, 0%, 100%);
+    --slate-100: hsl(202, 86%, 94%);
+    --slate-300: hsl(203, 41%, 72%);
+    --slate-500: hsl(200, 26%, 54%);
+    --slate-700: hsl(200, 24%, 40%);
+    --slate-900: hsl(202, 55%, 16%);
+}
+
+/* 
+**************************************
+            CSS RESET
+***************************************
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 
+**************************************
+            GLOBAL CSS
+***************************************
+*/
+
+body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.8px;
+    background-color: var(--slate-100);
+    color: var(--slate-700);
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: var(--slate-900);
+}
+
+h2 {
+    font-size: 22px;
+}
+
+input {
+    outline: none;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--slate-500);
+    border-radius: 5px;
+}
+
+label {
+    font-size: 12px;
+    display: block;
+}
+
+/* 
+**************************************
+            UTILITY CLASSES
+***************************************
+*/
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+/*
+**************************************
+            COMPONENTS
+***************************************
+*/
+
+.mortgage-calculator {
+    width: 1000px;
+    max-width: 90vw;
+    margin: 120px auto 50px;
+    border-radius: 15px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: var(--white);
+}
+
+.input-section {
+    background-color: var(--white);
+    padding: 30px;
+}
+
+.input-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-section .input-container {
+    position: relative;
+    margin-top: 10px;
+    z-index: 1;
+}
+
+.input-section input {
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+}
+
+.input-section .input-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--slate-100);
+    height: 100%;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding: 0 20px;
+    border-radius: 5px;
+}
+
+.input-section .input-icon.right {
+    left: unset;
+    right: 0;
+}
+
+.input-section input[type="reset"] {
+    border: none;
+    background-color: transparent;
+    color: var(--slate-700);
+    border-bottom: 1px solid var(--slate-500);
+}
+
+.input-section .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+input#mortgage-amount {
+    padding-left: 60px;
+}
+
+input#mortgage-term {
+    padding-right: 100px;
+}
+
+input#interest-rate {
+    padding-right: 60px;
+}
+
+label[for="repayment"],
+label[for="interest-only"] {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid var(--slate-500);
+    border-radius: 5px;
+    font-weight: 700;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+button[type="submit"] {
+    background-color: var(--primary-color);
+    padding: 10px 35px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: max-content;
+}
+
+.result-section {
+    background-color: var(--slate-900);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    border-radius: 0 0 0 55px;
+}
+
+.result-section h2 {
+    color: var(--white);
+    text-align: center;
+}
+
+.result-section p {
+    color: var(--slate-500);
+    text-align: center;
+}
+
+.result-section.displaying {
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: hsla(201.3, 55.6%, 15.9%, 0.9);
+}
+
+.result-section.displaying h2,
+.result-section.displaying p {
+    text-align: start;
+}
+
+.result-section .result-card {
+    width: 100%;
+    background-color: var(--slate-900);
+    padding: 20px;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 5px 5px 0 0;
+}
+
+.result-section .monthly-result,
+.result-section .total-result {
+    padding: 20px 0;
+}
+
+.result-section .monthly-result {
+    border-bottom: 1px solid rgba(181, 173, 173, 0.2);
+}
+
+.result-section .monthly-repayment {
+    color: var(--primary-color);
+    font-size: 42px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.result-section .total-repayment {
+    color: var(--white);
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+/*
+******************************************************
+            STATES: HOVERS, FOCUS, ERROR
+******************************************************
+*/
+
+/* HOVER */
+button[type="submit"]:hover {
+    opacity: 0.8;
+}
+
+.input-section input[type="reset"]:hover {
+    color: var(--slate-900);
+    border-bottom: 1px solid var(--slate-500);
+}
+
+input[type="text"]:hover {
+    border: 1px solid var(--slate-900);
+    border-radius: 5px;
+}
+
+label[for="repayment"]:hover,
+label[for="interest-only"]:hover {
+    border: 1px solid var(--primary-color);
+}
+
+/* FOCUS */
+input[type="text"]:focus {
+    border: 1px solid var(--primary-color);
+    color: var(--slate-900);
+}
+
+input[type="text"]:focus+.input-icon{
+    background-color: var(--primary-color);
+    color: var(--slate-900);
+}
+
+label[for="repayment"].selected,
+label[for="interest-only"].selected {
+    border: 1px solid var(--primary-color);
+    background-color: hsla(61.1, 69.8%, 52%, 0.28);
+    color: var(--slate-900);
+}
+
+/* ERROR */
+
+.error-msg {
+    color: var(--red);
+    font-size: 12px;
+    margin: 3px 0;
+    display: none;
+}
+
+input[type="text"].error {
+    border: 1px solid var(--red);
+}
+
+input[type="text"].error + .input-icon{
+    background-color: var(--red);
+    color: var(--white);
+}
+
+/* Attribution */
+.attribution { font-size: 11px; text-align: center; }
+.attribution a { color: hsl(228, 45%, 44%); }

@@ -5,57 +5,90 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
   <title>Frontend Mentor | Mortgage repayment calculator</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
 <body>
 
-  Mortgage Calculator
-  Clear All
+  <div class="mortgage-calculator">
+    <div class="input-section">
+      <form autocomplete="off" action="#">
+        <div class="form-group flex">
+          <h1>Mortgage Calculator</h1>
+          <input type="reset" value="Clear All">
+        </div>
+        <div class="form-group">
+          <label for="mortgage-amount">Mortgage Amount</label>
+          <div class="input-container">
+            <input type="text" name="mortgage-amount" id="mortgage-amount" autocomplete="false">
+            <span class="input-icon">&pound;</span>
+          </div>
+          <div class="error-msg mortgage-amount-error">This field is necessary</div>
+        </div>
+        <div class="row">
+          <div class="col-1">
+            <div class="form-group">
+              <label for="mortgage-term">Mortgage Term</label>
+              <div class="input-container">
+                <input type="text" name="mortgage-term" id="mortgage-term" autocomplete="false">
+                <span class="input-icon right">years</span>
+              </div>
+              <div class="error-msg mortgage-term-error">This field is necessary</div>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="interest-rate">Interest Rate</label>
+              <div class="input-container">
+                <input type="text" name="interest-rate" id="interest-rate" autocomplete="false">
+                <span class="input-icon right">%</span>
+              </div>
+              <div class="error-msg interest-rate-error">This field is necessary</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Mortgage Type</label>
+          <label for="repayment">
+            <input type="radio" name="mortgage-type" value="0" id="repayment"> Repayment
+          </label>
+          <label for="interest-only">
+            <input type="radio" name="mortgage-type" value="1" id="interest-only"> Interest Only
+          </label>
+          <div class="error-msg mortgage-type-error">This field is necessary</div>
+        </div>
+        <button type="submit" id="submit-btn"><img src="assets/images/icon-calculator.svg" alt="Calculator Icon"> Calculate Repayments</button>
+      </form>
+    </div>
+    <div class="result-section">
+      <img src="assets/images/illustration-empty.svg" alt="Empty">
+      <h2>Results shown here</h2>
+      <p>Complete the form and click "calculate repayments" to see what your monthly repayments would be.</p>
+    </div>
+    <!-- <div class="result-section displaying">
+      <h2>Your results</h2>
+      <p>Your results are shown below based on the information you provided. To adjust the results, edit the form and click "calculate repayments" again.</p>
+      <div class="result-card">
+        <div class="monthly-result">
+          <p class="result-title">Your monthly repayments</p>
+          <p class="monthly-repayment">&pound;1,797.74</p>
+        </div>
+        <div class="total-result">
+          <p class="result-title">Total you'll repay over the team</p>
+          <p class="total-repayment">&pound;539,322.94</p>
+        </div>
+      </div>
+    </div> -->
+  </div>
 
-  Mortgage Amount
 
-  Mortgage Term
-
-  Interest Rate
-
-  Mortgage Type
-  Repayment
-  Interest Only
-
-  Calculate Repayments
-
-  <!-- Empty results start -->
-
-  Results shown here
-
-  Complete the form and click “calculate repayments” to see what 
-  your monthly repayments would be.
-
-  <!-- Empty results end -->
-
-  <!-- Completed results start -->
-
-  Your results
-
-  Your results are shown below based on the information you provided. 
-  To adjust the results, edit the form and click “calculate repayments” again.
-
-  Your monthly repayments
-
-  Total you'll repay over the term
-
-  <!-- Completed results end -->
-  
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+    Coded by <a href="#">Swapnil Markal</a>.
   </div>
 </body>
 </html>
