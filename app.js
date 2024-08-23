@@ -27,8 +27,6 @@ function updateVariables() {
     interestRate = parseFloat(interestInput.value);
     isRepayment = repaymentRadio.checked;
     isInterestOnly = interestRadio.checked;
-
-    
 }
 
 // Result Section
@@ -36,10 +34,10 @@ const resultSection = document.querySelector('.result-section');
 
 function calculateMortgage() {
     // Check if all input are entered or selected
+    console.log(!checkAllSelected())
     if(!checkAllSelected()) {
         return;
     }
-
     // Check which radio button is selected
     if(repaymentRadio.checked) {
         totalRepayment()
@@ -49,6 +47,14 @@ function calculateMortgage() {
 }
 
 function totalRepayment() {
+    console.log('-----totalRepayment')
+    console.log("Amount: " + mortgageAmount);
+    console.log('Term: ' + mortgageTerm);
+    console.log('Interest: ' + interestRate);
+    console.log('Repayment: ' + isRepayment);
+    console.log('InterestOnly: ' + isInterestOnly);
+    console.log('-----totalRepayment')
+    
     let monthlyInterestRate = (interestRate / 100) / 12;
     let numberOfPayments = mortgageTerm * 12;
 
@@ -61,21 +67,20 @@ function totalRepayment() {
 }
 
 function interestOnly() {
+    let monthlyInterestRate = (interestRate / 100) / 12;  // Monthly interest rate
+    let monthlyInterestPayment = mortgageAmount * monthlyInterestRate; // Monthly interest payment
+    let totalInterestPaid = monthlyInterestPayment * mortgageTerm * 12; // Total interest over the entire term
+
+    // Update the DOM with the calculated values
+    updateDOM(monthlyInterestPayment.toFixed(2), totalInterestPaid.toFixed(2));
+}
+
+function interestOnly() {
     let monthlyInterestRate = (interestRate / 100) / 12;
-    let numberOfPayments = mortgageTerm * 12;
+    let monthlyPayment = mortgageAmount * monthlyInterestRate;
+    let totalInterestPaid = monthlyPayment * mortgageTerm * 12;
 
-    let monthlyPayment = mortgageAmount * (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) / 
-                        (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
-
-    let totalPayment = monthlyPayment * numberOfPayments;
-
-    // Calculate total interest paid
-    let totalInterestPaid = totalPayment - mortgageAmount;
-
-    // Calculate monthly interest (interest component of the first payment)
-    let firstMonthInterest = mortgageAmount * monthlyInterestRate;
-
-    updateDOM(firstMonthInterest.toFixed(2), totalInterestPaid.toFixed(2));
+    updateDOM(monthlyPayment.toFixed(2), totalInterestPaid.toFixed(2));
 }
 
 function updateDOM(monthlyValue = 'notset', totalValue = 'notset') {
@@ -111,10 +116,9 @@ function checkAllSelected() {
 
     // Check if radio button is selected
     let mortgageType = isRepayment || isInterestOnly;
-
     manageDomErrors();
 
-    if(mortgageAmount != '' && termInput != '' && interestInput != '' && mortgageType != '') {
+    if(!isNaN(mortgageAmount) && !isNaN(mortgageTerm) && !isNaN(interestRate) && mortgageType) {
         return true
     } else {
         return false;
@@ -183,15 +187,16 @@ function resetDOM() {
     removeErrorClass(interestInput);
     removeError(radioError);
     updateDOM();
+    document.querySelector('label[for="repayment"]').classList.remove('selected');
+    document.querySelector('label[for="interest-only"]').classList.remove('selected');
 }
 
 function checkInput(e) {
-    let input = event.target.value;
+    let input = e.target.value;
     e.target.value = input.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
 
     if(e.target.value != '') {
         e.target.classList.remove('error');
-        // console.log(e.target.nextElementSibling );
         const errorID = e.target.getAttribute('id') + '-error';
         document.querySelector(`.${errorID}`).style.display = 'none';
     }
